@@ -1,5 +1,6 @@
 <template>
     <div class="products">
+        <loading :active.sync="isLoading"></loading>
         <div class="text-right mt-4">
             <button class="btn btn-primary"
                 @click.prevent="openModal(true)">建立新的產品</button>
@@ -34,6 +35,33 @@
                 </tr>
             </tbody>
         </table>
+        <pagination
+            :pagination="pagination"
+            v-on:bindgetProducts="getProducts"
+        ></pagination>
+        <!-- <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" :class="{'disabled': !pagination.has_pre }">
+                <a class="page-link" href="#" aria-label="Previous"
+                @click.prevent="getProducts(pagination.current_page - 1)">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                </li>
+                <li class="page-item" v-for="page in pagination.total_pages"
+                :class="{'active': pagination.current_page === page}"
+                :key="page">
+                    <a class="page-link" href="#" @click.prevent="getProducts(page)">{{ page }}</a>
+                </li>
+                <li class="page-item" :class="{'disabled': !pagination.has_next }">
+                <a class="page-link" href="#" aria-label="Next"
+                @click.prevent="getProducts(pagination.current_page + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </li>
+            </ul>
+        </nav> -->
         <!-- Modal -->
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,10 +86,10 @@
                         </div>
                         <div class="form-group">
                         <label for="customFile">或 上傳圖片
-                            <i class="fas fa-spinner fa-spin"></i>
+                            <i class="fas fa-spinner fa-spin" v-if="status.fileUploading"></i>
                         </label>
                         <input type="file" id="customFile" class="form-control"
-                            ref="files">
+                            ref="files" @change="uploadFile">
                         </div>
                         <img class="img-fluid" alt="" :src="tempProduct.imageUrl">
                     </div>
@@ -173,22 +201,39 @@
 <script>
 // 可以用這個方式去閃過eslint的跳錯/* global $ */
 import $ from 'jquery';
+import pagination from '../Pagination';
 
 export default {
+  components:{
+      pagination,
+  },
   data() {
     return {
       products: [],
+      pagination: {},
       tempProduct: {},
       isNew: false,
+      isLoading: false,
+      status: {
+        fileUploading: false,
+      },
     };
   },
   methods: {
-    getProducts() {
+    getProducts(page = 1) {
       const vm = this;
-      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/products`;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/products?page=${page}`;
+      vm.isLoading = true;
       vm.$http.get(api).then((response) => {
-        // console.log(response.data);
+        vm.isLoading = false;
+        console.log(response.data);
         vm.products = response.data.products;
+        vm.pagination = response.data.pagination;
+      }).catch((error) => {
+        this.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/login');
+        }, 5000);
       });
     },
     openModal(isNew, item) {
@@ -217,18 +262,19 @@ export default {
         } else {
           $('#productModal').modal('hide');
           vm.getProducts();
-        //   console.log('新增失敗');
+          // console.log('新增失敗');
+          this.$bus.$emit('message:push', '新增失敗', 'danger');
         }
       });
     },
     opendelModal(item) {
-    //   console.log(item);
+      // console.log(item);
       $('#delProductModal').modal('show');
       this.tempProduct = Object.assign({}, item);
     },
     deleteProduct() {
       const vm = this;
-      let id = this.tempProduct.id;
+      const id = this.tempProduct.id;
       const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/product/${id}`;
       vm.$http.delete(api).then((response) => {
         // console.log(response.data);
@@ -238,13 +284,42 @@ export default {
         } else {
           $('#delProductModal').modal('hide');
           vm.getProducts();
-        //   console.log('刪除產品失敗');
+          // console.log('刪除產品失敗');
+          this.$bus.$emit('message:push', '刪除產品失敗', 'danger');
         }
       });
-    }
+    },
+    uploadFile() {
+      // console.log(this);
+      const uplodaedFile = this.$refs.files.files[0];
+      const vm = this;
+      const formData = new FormData();
+      formData.append('file-to-upload', uplodaedFile);
+      const url = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then((response) => {
+        vm.status.fileUploading = false;
+        // console.log(response.data);
+        if (response.data.success) {
+          // vm.tempProduct.imageUrl = response.data.imageUrl;
+          // console.log(vm.tempProduct);
+          // 會發現有綁值上去但是沒有被雙向綁定，因為tempProduct的結構有問題，所以我們要用set去處理
+          vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+        } else {
+          this.$bus.$emit('message:push', response.data.message, 'danger');
+        }
+      }).catch((error) => {
+        this.$bus.$emit('message:push', error.data.message, 'danger');
+      });
+    },
   },
   created() {
     this.getProducts();
+    // this.$bus.$emit('message:push', '這裡是一段訊息', 'success');
   },
 };
 </script>
