@@ -35,7 +35,9 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <router-link to="" class="nav-link">
+                        <router-link to="/customer_order" class="nav-link"
+                        :class="{'active': $route.path=='/customer_order'}"
+                        >
                         <i class="fas fa-shopping-cart"></i>
                         模擬訂單
                         </router-link>
