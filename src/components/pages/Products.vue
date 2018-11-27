@@ -20,8 +20,8 @@
                 <tr v-for="(item, key) in products" :key="key">
                     <td>{{ item.category }}</td>
                     <td>{{ item.title }}</td>
-                    <td class="text-right">{{ item.origin_price }}</td>
-                    <td class="text-right">{{ item.price }}</td>
+                    <td class="text-right">{{ item.origin_price | currency }}</td>
+                    <td class="text-right">{{ item.price | currency }}</td>
                     <td>
                         <span v-if="item.is_enabled" class="text-success">啟用</span>
                         <span v-else>未啟用</span>
@@ -167,8 +167,8 @@
                 </div>
                 </div>
             </div>
-            </div>
-            <div class="modal fade" id="delProductModal" tabindex="-1" role="dialog"
+        </div>
+        <div class="modal fade" id="delProductModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content border-0">
@@ -204,8 +204,8 @@ import $ from 'jquery';
 import pagination from '../Pagination';
 
 export default {
-  components:{
-      pagination,
+  components: {
+    pagination,
   },
   data() {
     return {
@@ -226,7 +226,7 @@ export default {
       vm.isLoading = true;
       vm.$http.get(api).then((response) => {
         vm.isLoading = false;
-        console.log(response.data);
+        // console.log(response.data);
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       }).catch((error) => {

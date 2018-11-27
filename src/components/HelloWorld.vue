@@ -21,8 +21,8 @@ export default {
           vm.$router.push("/login");
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

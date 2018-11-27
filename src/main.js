@@ -10,11 +10,13 @@ import 'bootstrap';
 import App from './App';
 import router from './router';
 import './bus';
+import currencyFilter from './filters/currency';
 
 Vue.use(VueAxios, axios);
 
 // 全域啟動Loading Component
 Vue.component('Loading', Loading);
+Vue.filter('currency', currencyFilter);
 
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;

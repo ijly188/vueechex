@@ -37,10 +37,10 @@ export default {
   },
   methods: {
     getProducts(page) {
-      this.$emit('bindgetProducts',page);
+      this.$emit('bindgetProducts', page);
     },
   },
-}
+};
 </script>
 
 <style>
