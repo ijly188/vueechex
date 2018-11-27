@@ -158,7 +158,7 @@ export default {
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -191,7 +191,7 @@ export default {
           $('#CouponModal').modal('hide');
           vm.getCoupons();
           // console.log('新增失敗');
-          this.$bus.$emit('message:push', '新增失敗', 'danger');
+          vm.$bus.$emit('message:push', '新增失敗', 'danger');
         }
       });
     },
@@ -213,7 +213,7 @@ export default {
           $('#delCouponModal').modal('hide');
           vm.getCoupons();
           // console.log('刪除產品失敗');
-          this.$bus.$emit('message:push', '刪除產品失敗', 'danger');
+          vm.$bus.$emit('message:push', '刪除產品失敗', 'danger');
         }
       });
     },

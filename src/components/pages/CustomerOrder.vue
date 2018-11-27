@@ -133,7 +133,7 @@ export default {
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -151,7 +151,7 @@ export default {
         // vm.products = response.data.products;
         // vm.pagination = response.data.pagination;
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -173,7 +173,7 @@ export default {
           // vm.product = response.data.product;
         }
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -189,7 +189,7 @@ export default {
     //     // vm.products = response.data.products;
     //     // vm.pagination = response.data.pagination;
     //   }).catch((error) => {
-    //     this.$bus.$emit('message:push', error, 'danger');
+    //     vm.$bus.$emit('message:push', error, 'danger');
     //     setTimeout(() => {
     //       vm.$router.push('/login');
     //     }, 5000);

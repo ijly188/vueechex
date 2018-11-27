@@ -1,5 +1,5 @@
 <template>
-    <div class="cart">
+    <div class="cart" v-if="status.isShow">
         <table class="table">
             <thead>
                 <th></th>
@@ -10,7 +10,8 @@
             <tbody>
                 <tr v-for="(item, key) in cart.carts" :key="key">
                     <td class="align-middle">
-                        <button type="button" class="btn btn-outline-danger btn-sm">
+                        <button type="button" class="btn btn-outline-danger btn-sm"
+                        @click.prevent="removeCartItem(item.id)">
                         <i class="far fa-trash-alt"></i>
                         </button>
                     </td>
@@ -58,6 +59,9 @@ export default {
   data() {
     return {
       cart: [],
+      status: {
+        isShow: false,
+      },
     };
   },
   methods: {
@@ -70,6 +74,27 @@ export default {
           vm.isLoading = false;
           // console.log(response.data);
           vm.cart = response.data.data;
+          if (vm.cart.carts.length == 0) {
+            vm.status.isShow = false;
+          }
+        }
+      }).catch((error) => {
+        this.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/login');
+        }, 5000);
+      });
+    },
+    removeCartItem(id) {
+      const vm = this;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/cart/${id}`;
+      vm.isLoading = true;
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.isLoading = false;
+          // console.log(response.data);
+          // vm.cart = response.data.data;
+          vm.getCart();
         }
       }).catch((error) => {
         this.$bus.$emit('message:push', error, 'danger');
@@ -86,9 +111,15 @@ export default {
         this.getCart();
       }
     },
+    cart() {
+      if (this.cart.carts.length !== 0) {
+        this.status.isShow = true;
+      }
+    },
   },
   created() {
     this.getCart();
+    console.log(this.cart.carts);
   },
 };
 </script>

@@ -230,7 +230,7 @@ export default {
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -263,7 +263,7 @@ export default {
           $('#productModal').modal('hide');
           vm.getProducts();
           // console.log('新增失敗');
-          this.$bus.$emit('message:push', '新增失敗', 'danger');
+          vm.$bus.$emit('message:push', '新增失敗', 'danger');
         }
       });
     },
@@ -285,7 +285,7 @@ export default {
           $('#delProductModal').modal('hide');
           vm.getProducts();
           // console.log('刪除產品失敗');
-          this.$bus.$emit('message:push', '刪除產品失敗', 'danger');
+          vm.$bus.$emit('message:push', '刪除產品失敗', 'danger');
         }
       });
     },
@@ -310,10 +310,10 @@ export default {
           // 會發現有綁值上去但是沒有被雙向綁定，因為tempProduct的結構有問題，所以我們要用set去處理
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
         } else {
-          this.$bus.$emit('message:push', response.data.message, 'danger');
+          vm.$bus.$emit('message:push', response.data.message, 'danger');
         }
       }).catch((error) => {
-        this.$bus.$emit('message:push', error.data.message, 'danger');
+        vm.$bus.$emit('message:push', error.data.message, 'danger');
       });
     },
   },

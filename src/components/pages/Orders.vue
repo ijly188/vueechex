@@ -66,7 +66,7 @@ export default {
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
