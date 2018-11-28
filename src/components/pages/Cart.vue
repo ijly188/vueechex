@@ -1,6 +1,6 @@
 <template>
     <div class="cart" v-if="status.isShow">
-        <table class="table">
+        <table class="table col-6 mx-auto">
             <thead>
                 <th></th>
                 <th>品名</th>
@@ -36,7 +36,7 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="input-group mb-3 input-group-sm">
+        <div class="input-group mb-3 input-group-sm col-6 mx-auto">
             <input type="text" class="form-control"
             v-model="coupon_code" placeholder="請輸入優惠碼">
             <div class="input-group-append">
@@ -46,17 +46,22 @@
                 </button>
             </div>
         </div>
+        <orderForm
+          v-on:updatecart="getCart()"
+        ></orderForm>
     </div>
 </template>
 <script>
 // 可以用這個方式去閃過eslint的跳錯/* global $ */
 // import $ from 'jquery';
+import orderForm from '../pages/Orderform';
 
 export default {
   props: [
     'isUpdate',
   ],
   components: {
+    orderForm,
   },
   data() {
     return {
@@ -64,6 +69,7 @@ export default {
       status: {
         isShow: false,
       },
+      isLoading: false,
       coupon_code: '',
     };
   },
