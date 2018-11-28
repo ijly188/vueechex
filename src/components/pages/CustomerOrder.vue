@@ -43,10 +43,14 @@
             :pagination="pagination"
             v-on:bindgetProducts="getProducts"
         ></pagination>
-        <cartComponent
-            :isUpdate="status.isUpdate"
-            v-on:changeStatus="updateCart"
-        ></cartComponent>
+        <div class="row">
+            <div class="col-8 mx-auto my-4 text-center">
+                <cartComponent
+                    :isUpdate="status.isUpdate"
+                    v-on:changeStatus="updateCart"
+                ></cartComponent>
+            </div>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">

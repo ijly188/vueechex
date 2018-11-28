@@ -17,9 +17,9 @@
                     </td>
                     <td class="align-middle">
                         {{ item.product.title }}
-                        <!-- <div class="text-success" v-if="item.coupon">
+                        <div class="text-success" v-if="item.coupon">
                         已套用優惠券
-                        </div> -->
+                        </div>
                     </td>
                     <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
                     <td class="align-middle text-right">{{ item.final_total }}</td>
@@ -30,16 +30,18 @@
                     <td colspan="3" class="text-right">總計</td>
                     <td class="text-right">{{ cart.total }}</td>
                 </tr>
-                <tr>
+                <tr v-if="cart.final_total !== cart.total">
                     <td colspan="3" class="text-right text-success">折扣價</td>
                     <td class="text-right text-success">{{ cart.final_total }}</td>
                 </tr>
             </tfoot>
         </table>
         <div class="input-group mb-3 input-group-sm">
-            <input type="text" class="form-control" placeholder="請輸入優惠碼">
+            <input type="text" class="form-control"
+            v-model="coupon_code" placeholder="請輸入優惠碼">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">
+                <button class="btn btn-outline-secondary"
+                @click="addCouponCode" type="button">
                 套用優惠碼
                 </button>
             </div>
@@ -62,6 +64,7 @@ export default {
       status: {
         isShow: false,
       },
+      coupon_code: '',
     };
   },
   methods: {
@@ -74,12 +77,12 @@ export default {
           vm.isLoading = false;
           // console.log(response.data);
           vm.cart = response.data.data;
-          if (vm.cart.carts.length == 0) {
+          if (vm.cart.carts.length === 0) {
             vm.status.isShow = false;
           }
         }
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -97,7 +100,35 @@ export default {
           vm.getCart();
         }
       }).catch((error) => {
-        this.$bus.$emit('message:push', error, 'danger');
+        vm.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/login');
+        }, 5000);
+      });
+    },
+    addCouponCode() {
+      const vm = this;
+      const coupon = {
+        code: vm.coupon_code,
+      };
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/coupon`;
+      vm.isLoading = true;
+      vm.$http.post(api, { data: coupon }).then((response) => {
+        let status = '';
+        if (response.data.success) {
+          status = 'success';
+          vm.isLoading = false;
+          // console.log(response.data);
+          // vm.cart = response.data.data;
+          vm.getCart();
+        } else {
+          status = 'danger';
+          // console.log(response.data);
+        }
+        vm.$bus.$emit('message:push', response.data.message, status);
+      }).catch((error) => {
+        // console.log(error);
+        vm.$bus.$emit('message:push', error, 'danger');
         setTimeout(() => {
           vm.$router.push('/login');
         }, 5000);
@@ -119,7 +150,7 @@ export default {
   },
   created() {
     this.getCart();
-    console.log(this.cart.carts);
+    // console.log(this.cart.carts);
   },
 };
 </script>

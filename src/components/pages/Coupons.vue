@@ -22,7 +22,9 @@
                 <tr v-for="(item, key) in coupons" :key="key" v-else>
                     <td>{{ item.title }}</td>
                     <td>{{ item.percent }}</td>
-                    <td class="text-right">{{ item.due_date }}</td>
+                    <td class="text-right">
+                        {{ new Date(item.due_date * 1000).toLocaleDateString() }}
+                    </td>
                     <td>
                         <span v-if="item.is_enabled" class="text-success">啟用</span>
                         <span v-else>未啟用</span>
@@ -170,6 +172,14 @@ export default {
         this.isNew = true;
       } else {
         this.tempCoupon = Object.assign({}, item);
+
+        // set timestamp
+        let timestamp = this.tempCoupon.due_date;
+        timestamp = new Date(timestamp * 1000).toLocaleDateString();
+        timestamp = timestamp.replace(/\//g, '-');
+        // console.log(timestamp);
+        this.tempCoupon.due_date = timestamp;
+
         this.isNew = false;
       }
       $('#CouponModal').modal('show');
@@ -182,6 +192,11 @@ export default {
         api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/coupon/${vm.tempCoupon.id}`;
         httpMethod = 'put';
       }
+
+      const time = vm.tempCoupon.due_date;
+      const timeStamp = Math.floor(Date.parse(time) / 1000);
+      vm.tempCoupon.due_date = timeStamp;
+
       vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
         // console.log(response.data);
         if (response.data.success) {
