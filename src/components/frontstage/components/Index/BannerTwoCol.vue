@@ -94,6 +94,7 @@
     </div>
 </template>
 <script>
+/* global $ */
 import Alert from '../../../AlertMessage';
 
 export default {
@@ -101,7 +102,7 @@ export default {
     Alert,
   },
   mounted() {
-    (function ($) {
+    (function () {
       function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date());
         const seconds = Math.floor((t / 1000) % 60);
@@ -122,6 +123,7 @@ export default {
         const hoursSpan = $('.hours');
         const minutesSpan = $('.minutes');
         const secondsSpan = $('.seconds');
+        var timeinterval = setInterval(updateClock, 1000);
 
         function updateClock() {
           const t = getTimeRemaining(endtime);
@@ -135,10 +137,11 @@ export default {
         }
 
         updateClock();
-        var timeinterval = setInterval(updateClock, 1000);
-      };
+      }
 
-      const deadline = new Date(Date.parse(new Date()) + 69 * 24 * 60 * 60 * 1000 + 13 * 60 * 60 * 1000); 
+      const deadline = new Date(
+        Date.parse(new Date()) + 69 * 24 * 60 * 60 * 1000 + 13 * 60 * 60 * 1000,
+      );
       initializeClock('clockdiv', deadline);
     })(jQuery);
   },

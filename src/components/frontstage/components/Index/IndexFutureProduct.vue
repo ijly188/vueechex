@@ -340,13 +340,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
 </template>
 <script>
-import $ from 'jquery';
+/* global $ */
 import Alert from '../../../AlertMessage';
 
 export default {

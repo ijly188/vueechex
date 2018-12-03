@@ -359,8 +359,69 @@
     </div>
 </template>
 <script>
+/* global $ */
 export default {
   components: {
   },
+  mounted() {
+    $('.selection-1').select2({
+      minimumResultsForSearch: 20,
+      dropdownParent: $('#dropDownSelect1'),
+    });
+
+    $('.block2-btn-addcart').each(function(){
+      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+      $(this).on('click', function(){
+        swal(nameProduct, "is added to cart !", "success");
+      });
+    });
+
+    $('.block2-btn-addwishlist').each(function(){
+      var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+      $(this).on('click', function(){
+        swal(nameProduct, "is added to wishlist !", "success");
+      });
+    });
+
+    /*[ Show header dropdown ]
+    ===========================================================*/
+    $('.js-show-header-dropdown').on('click', function(){
+      $(this).parent().find('.header-dropdown')
+    });
+
+    var menu = $('.js-show-header-dropdown');
+    var sub_menu_is_showed = -1;
+
+    for(var i=0; i<menu.length; i++){
+      $(menu[i]).on('click', function(){         
+        if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
+          $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
+            sub_menu_is_showed = -1;
+          }
+        else {
+          for (var i = 0; i < menu.length; i++) {
+            $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
+          }
+          $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
+          sub_menu_is_showed = jQuery.inArray( this, menu );
+        }
+      });
+    }
+
+    $(".js-show-header-dropdown, .header-dropdown").click(function(event){
+      event.stopPropagation();
+    });
+
+    $(window).on("click", function(){
+      for (var i = 0; i < menu.length; i++) {
+        $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
+      }
+      sub_menu_is_showed = -1;
+    });
+  },
 };
 </script>
+
+<style>
+@import "../../../static/frontstage/css/main.css";
+</style>

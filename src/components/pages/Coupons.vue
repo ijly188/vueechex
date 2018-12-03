@@ -217,7 +217,7 @@ export default {
     },
     deleteCoupon() {
       const vm = this;
-      const id = this.tempCoupon.id;
+      const { id } = this.tempCoupon.id;
       const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/coupon/${id}`;
       vm.$http.delete(api).then((response) => {
         // console.log(response.data);

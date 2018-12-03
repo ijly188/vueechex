@@ -161,8 +161,7 @@
                 </div>
             </div>
         </section>
-
-    </div>    
+    </div>
 </template>
 <script>
 import Alert from '../../../AlertMessage';

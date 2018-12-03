@@ -3,6 +3,8 @@ import Router from 'vue-router';
 // front stage
 import Indexwrap from '@/components/frontstage/Indexwrap';
 import IndexContent from '@/components/frontstage/IndexContent';
+import Category from '@/components/frontstage/Category';
+import Product from '@/components/frontstage/Product';
 // back stage
 import Login from '@/components/pages/Login';
 import Products from '@/components/pages/Products';
@@ -29,6 +31,16 @@ export default new Router({
           path: '',
           name: 'FrontStageContent',
           component: IndexContent,
+        },
+        {
+          path: 'category/:id',
+          name: 'FrontStageCategory',
+          component: Category,
+        },
+        {
+          path: 'product/:id',
+          name: 'FrontStageProduct',
+          component: Product,
         },
       ],
     },

@@ -54,7 +54,7 @@
 <script>
 // 可以用這個方式去閃過eslint的跳錯/* global $ */
 // import $ from 'jquery';
-import orderForm from '../pages/Orderform';
+import orderForm from './Orderform';
 
 export default {
   props: [

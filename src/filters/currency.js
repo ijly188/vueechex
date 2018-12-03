@@ -1,6 +1,6 @@
 export default function (num) {
   const n = Number(num);
-  if (isNaN(n)) {
+  if (Number.isNaN(n)) {
     return '';
   }
   return `$${n.toFixed(0).replace(/./g, (c, i, a) => {

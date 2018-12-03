@@ -102,7 +102,7 @@
 // 可以用這個方式去閃過eslint的跳錯/* global $ */
 import $ from 'jquery';
 import pagination from '../Pagination';
-import cartComponent from '../pages/Cart';
+import cartComponent from './Cart';
 
 export default {
   components: {

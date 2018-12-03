@@ -29,7 +29,8 @@
                 <span class="s-text6">on</span> <span class="s-text7">July 22, 2017</span>
 
                 <p class="s-text8 p-t-16">
-                  Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
+                  Duis ut velit gravida nibh bibendum commodo.
+                  Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
                 </p>
               </div>
             </div>
@@ -53,7 +54,9 @@
                 <span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
 
                 <p class="s-text8 p-t-16">
-                  Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
+                  Nullam scelerisque, lacus sed consequat laoreet,
+                  dui enim iaculis leo, eu viverra ex nulla in tellus.
+                  Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
                 </p>
               </div>
             </div>
@@ -77,7 +80,9 @@
                 <span class="s-text6">on</span> <span class="s-text7">July 2, 2017</span>
 
                 <p class="s-text8 p-t-16">
-                  Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
+                  Proin nec vehicula lorem, a efficitur ex. Nam
+                  vehicula nulla vel erat tincidunt, sed hendrerit
+                  ligula porttitor. Fusce sit amet maximus nunc
                 </p>
               </div>
             </div>
