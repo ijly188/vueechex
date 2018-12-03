@@ -25,3 +25,12 @@ https://vue-course-api.hexschool.io/
 
 ## wiki page
 https://github.com/hexschool/vue-course-api-wiki/wiki
+
+## frontpage template
+https://colorlib.com/wp/template/fashe/
+
+## owl
+https://github.com/s950329/vue-owl-carousel
+
+## slick
+http://kenwheeler.github.io/slick/

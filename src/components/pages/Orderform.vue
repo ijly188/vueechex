@@ -3,27 +3,55 @@
         <div class="my-5 row justify-content-center">
             <form class="col-md-6" @submit.prevent="createOrder">
                 <div class="form-group">
-                    <label for="useremail">Email</label>
+                    <label for="useremail"
+                    :class="{'text-danger': errors.has('email')}"
+                    >*Email</label>
                     <input type="email" class="form-control" name="email" id="useremail"
-                        v-model="form.user.email" placeholder="請輸入 Email" required>
-                    <span class="text-danger"></span>
+                    v-model="form.user.email"
+                    :class="{'is-invalid': errors.has('email')}"
+                    v-validate="'required|email'"
+                    placeholder="請輸入 Email">
+                    <span class="text-danger" v-if="errors.has('email')">
+                        {{ errors.first('email') }}
+                    </span>
                 </div>
                 <div class="form-group">
-                    <label for="username">收件人姓名</label>
+                    <label for="username"
+                    :class="{'text-danger': errors.has('name')}"
+                    >*收件人姓名</label>
                     <input type="text" class="form-control" name="name" id="username"
-                        v-model="form.user.name" placeholder="輸入姓名">
-                    <span class="text-danger"></span>
+                    v-validate="'required'"
+                    :class="{'is-invalid': errors.has('name')}"
+                    v-model="form.user.name" placeholder="輸入姓名">
+                    <!-- <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span> -->
+                    <span class="text-danger" v-if="errors.has('name')">
+                        {{ errors.first('name') }}
+                    </span>
                 </div>
                 <div class="form-group">
-                    <label for="usertel">收件人電話</label>
-                    <input type="tel" class="form-control" id="usertel"
-                    v-model="form.user.tel" placeholder="請輸入電話">
+                    <label for="usertel"
+                    :class="{'text-danger': errors.has('usertel')}"
+                    >*收件人電話</label>
+                    <input type="tel" class="form-control" id="usertel" name="usertel"
+                    v-model="form.user.tel"
+                    :class="{'is-invalid': errors.has('usertel')}"
+                    v-validate="{ required: true, regex: /\d{10}/, length: 10 }"
+                    placeholder="請輸入電話,0212345678">
+                    <span class="text-danger" v-if="errors.has('usertel')">
+                        {{ errors.first('usertel') }}
+                    </span>
                 </div>
                 <div class="form-group">
-                    <label for="useraddress">收件人地址</label>
+                    <label for="useraddress"
+                    :class="{'text-danger': errors.has('address')}"
+                    >*收件人地址</label>
                     <input type="address" class="form-control" name="address"
+                    :class="{'is-invalid': errors.has('address')}"
+                    v-validate="{ required: true }"
                     id="useraddress" v-model="form.user.address" placeholder="請輸入地址">
-                    <span class="text-danger">地址欄位不得留空</span>
+                    <span class="text-danger" v-if="errors.has('address')">
+                        {{ errors.first('address') }}
+                    </span>
                 </div>
                 <div class="form-group">
                     <label for="useraddress">留言</label>
@@ -67,18 +95,25 @@ export default {
       const vm = this;
       const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/order`;
       vm.isLoading = true;
-      vm.$http.post(api, { data: vm.form }).then((response) => {
-        if (response.data.success) {
-          vm.isLoading = false;
-          // console.log('訂單已建立', response);
-          vm.$bus.$emit('message:push', response.data.message, 'success');
-          this.$emit('updatecart', '');
+      this.$validator.validate().then((result) => {
+        if (result) {
+          vm.$http.post(api, { data: vm.form }).then((response) => {
+            if (response.data.success) {
+              vm.isLoading = false;
+              // console.log('訂單已建立', response);
+              vm.$bus.$emit('message:push', response.data.message, 'success');
+              this.$emit('updatecart', '');
+              vm.$router.push(`/checkout/${response.data.orderId}`);
+            }
+          }).catch((error) => {
+            vm.$bus.$emit('message:push', error, 'danger');
+            setTimeout(() => {
+              vm.$router.push('/login');
+            }, 5000);
+          });
+        } else {
+          vm.$bus.$emit('message:push', '欄位資料不完整', 'danger');
         }
-      }).catch((error) => {
-        vm.$bus.$emit('message:push', error, 'danger');
-        setTimeout(() => {
-          vm.$router.push('/login');
-        }, 5000);
       });
     },
   },

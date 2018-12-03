@@ -4,8 +4,10 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
+import VeeValidate from 'vee-validate';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import 'bootstrap';
+import zhTWValidate from 'vee-validate/dist/locale/zh_TW';
 
 import App from './App';
 import router from './router';
@@ -17,6 +19,9 @@ Vue.use(VueAxios, axios);
 // 全域啟動Loading Component
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
+
+Vue.use(VeeValidate);
+VeeValidate.Validator.localize('zh-TW', zhTWValidate);
 
 axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;

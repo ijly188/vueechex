@@ -15,13 +15,24 @@
                 <tr v-if="orders.length == 0">
                     <td colspan="5">尚無訂單</td>
                 </tr>
-                <tr v-for="(item, key) in orders" :key="key" v-else>
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.title }}</td>
-                    <td class="text-right">{{ item.origin_price | currency }}</td>
-                    <td class="text-right">{{ item.price | currency }}</td>
+                <tr v-for="(item) in orders" :key="item.id" v-else>
+                    <td>{{ item.create_at }}</td>
+                    <td v-if="item.user">
+                      {{ item.user.email }}
+                    </td>
+                    <td v-else>
+                      尚未填入email
+                    </td>
+                    <td v-if="item.products">
+                      <span v-for="(product, key) in item.products" :key="key">
+                        {{ item.products[key].product.title +
+                        '數量：' +
+                        item.products[key].qty + item.products[key].product.unit }} <br>
+                      </span>
+                    </td>
+                    <td class="text-right">{{ item.total | currency }}</td>
                     <td>
-                        <span v-if="item.is_enabled" class="text-success">啟用</span>
+                        <span v-if="item.is_paid" class="text-success">啟用</span>
                         <span v-else>未啟用</span>
                     </td>
                 </tr>

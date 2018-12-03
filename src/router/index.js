@@ -1,11 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import HelloWorld from '@/components/HelloWorld';
+// front stage
+import Indexwrap from '@/components/frontstage/Indexwrap';
+import IndexContent from '@/components/frontstage/IndexContent';
+// back stage
 import Login from '@/components/pages/Login';
 import Products from '@/components/pages/Products';
 import Orders from '@/components/pages/Orders';
 import Coupons from '@/components/pages/Coupons';
 import CustomerOrder from '@/components/pages/CustomerOrder';
+import Checkout from '@/components/Checkout';
 import Dashboard from '@/components/Dashboard';
 
 Vue.use(Router);
@@ -16,12 +20,18 @@ export default new Router({
       path: '*',
       redirect: '/login',
     },
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld,
-    //   meta: { requiresAuth: true },
-    // },
+    {
+      path: '/',
+      // name: 'FrontStage',
+      component: Indexwrap,
+      children: [
+        {
+          path: '',
+          name: 'FrontStageContent',
+          component: IndexContent,
+        },
+      ],
+    },
     {
       path: '/admin',
       name: 'Dashboard',
@@ -45,20 +55,36 @@ export default new Router({
           component: Coupons,
           meta: { requiresAuth: true },
         },
-      ],
-    },
-    {
-      path: '/',
-      name: 'DashboardWithoutConfirm',
-      component: Dashboard,
-      children: [
         {
           path: 'customer_order',
           name: 'CustomerOrder',
           component: CustomerOrder,
         },
+        {
+          path: 'checkout/:order_id',
+          name: 'Checkout',
+          component: Checkout,
+        },
       ],
     },
+    // {
+    //   path: '/',
+    //   name: 'DashboardWithoutConfirm',
+    //   component: Dashboard,
+    //   meta: { requiresAuth: true },
+    //   children: [
+    //     {
+    //       path: 'customer_order',
+    //       name: 'CustomerOrder',
+    //       component: CustomerOrder,
+    //     },
+    //     {
+    //       path: 'checkout/:order_id',
+    //       name: 'Checkout',
+    //       component: Checkout,
+    //     },
+    //   ],
+    // },
     {
       path: '/login',
       name: 'Login',
