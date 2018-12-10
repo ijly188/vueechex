@@ -16,24 +16,40 @@
                     <td colspan="5">尚無訂單</td>
                 </tr>
                 <tr v-for="(item) in orders" :key="item.id" v-else>
-                    <td>{{ item.create_at }}</td>
+                    <td>
+                      <router-link :to="'/admin/checkout/' + item.id">
+                        {{ new Date(item.create_at * 1e3).toLocaleString() }}
+                      </router-link>
+                    </td>
                     <td v-if="item.user">
-                      {{ item.user.email }}
+                      <router-link :to="'/admin/checkout/' + item.id">
+                        {{ item.user.email }}
+                      </router-link>
                     </td>
                     <td v-else>
+                      <router-link :to="'/admin/checkout/' + item.id">
                       尚未填入email
+                      </router-link>
                     </td>
                     <td v-if="item.products">
-                      <span v-for="(product, key) in item.products" :key="key">
-                        {{ item.products[key].product.title +
-                        '數量：' +
-                        item.products[key].qty + item.products[key].product.unit }} <br>
-                      </span>
+                      <router-link :to="'/admin/checkout/' + item.id">
+                        <span v-for="(product, key) in item.products" :key="key">
+                          {{ item.products[key].product.title +
+                          '數量：' +
+                          item.products[key].qty + item.products[key].product.unit }} <br>
+                        </span>
+                      </router-link>
                     </td>
-                    <td class="text-right">{{ item.total | currency }}</td>
+                    <td class="text-right">
+                      <router-link :to="'/admin/checkout/' + item.id">
+                        {{ item.total | currency }}
+                      </router-link>
+                    </td>
                     <td>
+                      <router-link :to="'/admin/checkout/' + item.id">
                         <span v-if="item.is_paid" class="text-success">啟用</span>
                         <span v-else>未啟用</span>
+                      </router-link>
                     </td>
                 </tr>
             </tbody>

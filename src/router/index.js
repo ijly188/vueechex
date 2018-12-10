@@ -5,6 +5,7 @@ import Indexwrap from '@/components/frontstage/Indexwrap';
 import IndexContent from '@/components/frontstage/IndexContent';
 import Category from '@/components/frontstage/Category';
 import Product from '@/components/frontstage/Product';
+import Cart from '@/components/frontstage/Cart';
 // back stage
 import Login from '@/components/pages/Login';
 import Products from '@/components/pages/Products';
@@ -41,6 +42,11 @@ export default new Router({
           path: 'product/:id',
           name: 'FrontStageProduct',
           component: Product,
+        },
+        {
+          path: 'cart/:id',
+          name: 'FrontStageCart',
+          component: Cart,
         },
       ],
     },

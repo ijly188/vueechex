@@ -88,10 +88,11 @@ export default {
           }
         }
       }).catch((error) => {
-        vm.$bus.$emit('message:push', error, 'danger');
-        setTimeout(() => {
-          vm.$router.push('/login');
-        }, 5000);
+        console.log(error);
+        // vm.$bus.$emit('message:push', error, 'danger');
+        // setTimeout(() => {
+        //   vm.$router.push('/login');
+        // }, 5000);
       });
     },
     removeCartItem(id) {

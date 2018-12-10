@@ -24,7 +24,7 @@
                 </table>
 
                 <table class="table">
-                <tbody>
+                <tbody v-if="order.user">
                     <tr>
                     <th width="100">Email</th>
                     <td>{{ order.user.email }}</td>
@@ -81,7 +81,7 @@ export default {
       vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.isLoading = false;
-          // console.log(response);
+          console.log(response);
           vm.order = response.data.order;
           // vm.$bus.$emit('message:push', response.data.message, 'success');
         }

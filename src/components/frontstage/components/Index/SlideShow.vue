@@ -29,25 +29,41 @@ export default {
 
 <style lang="scss">
 .SlideShow{
-  position: relative;
+  // position: relative;
   div:nth-child(2){
-    max-height: 570px;
+    // max-height: 570px;
     img {
-      max-height: 570px;
+      // max-height: 570px;
     }
   }
 }
+.owl-carousel.owl-loaded{
+  position: relative;
+}
+.owl-carousel .owl-stage-outer{
+  z-index: 1000;
+}
 .owl-theme{
   .owl-nav{
-    margin: -432px auto 432px auto;
-    position: initial;
+    // margin: -100% auto 100% auto;
+    height: 100%;
+    margin-top: 0;
+    position: absolute;
     text-align: inherit;
+    top: 0;
+    width: 100%;
     div{
       background-color: initial;
       display: block;
       height: 100%;
-      position: absolute;
+      line-height: 100%;
+      // position: absolute;
       width: 10%;
+      i{
+        margin: -24px 0 0 0;
+        position: relative;
+        top: 50%;
+      }
     }
     .owl-prev{
       background-color: initial;
@@ -62,8 +78,11 @@ export default {
 }
 .owl-theme .owl-nav [class*='owl-']{
   font-size: 48px;
-  line-height: 390px;
+  line-height: 100%;
+  margin: 0;
+  position: absolute;
   text-align: center;
+  z-index: 1001;
 }
 .owl-theme .owl-nav .owl-prev:hover{
   background: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);

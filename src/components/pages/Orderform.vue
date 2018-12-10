@@ -103,7 +103,7 @@ export default {
               // console.log('訂單已建立', response);
               vm.$bus.$emit('message:push', response.data.message, 'success');
               this.$emit('updatecart', '');
-              vm.$router.push(`/checkout/${response.data.orderId}`);
+              vm.$router.push(`/admin/checkout/${response.data.orderId}`);
             }
           }).catch((error) => {
             vm.$bus.$emit('message:push', error, 'danger');

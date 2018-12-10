@@ -274,10 +274,10 @@ export default {
     },
     deleteProduct() {
       const vm = this;
-      const { id } = this.tempProduct.id;
+      const id = this.tempProduct.id;
       const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/product/${id}`;
       vm.$http.delete(api).then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         if (response.data.success) {
           $('#delProductModal').modal('hide');
           vm.getProducts();
