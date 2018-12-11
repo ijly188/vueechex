@@ -45,7 +45,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../assets/all.scss";
+
 html,
 body {
   height: 100%;

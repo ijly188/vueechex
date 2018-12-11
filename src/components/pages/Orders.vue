@@ -1,5 +1,6 @@
 <template>
     <div class="orders">
+        <Alert></Alert>
         <loading :active.sync="isLoading"></loading>
         <table class="table mt-4">
             <thead>

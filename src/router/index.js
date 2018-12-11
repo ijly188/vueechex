@@ -15,6 +15,21 @@ import CustomerOrder from '@/components/pages/CustomerOrder';
 import Checkout from '@/components/Checkout';
 import Dashboard from '@/components/Dashboard';
 
+// custom backstage
+import CustomBackstageLogin from '@/components/backstage/pages/Login';
+import CustomBackstageRegister from '@/components/backstage/pages/Register';
+import CustomBackstageError from '@/components/backstage/pages/Error';
+import CustomBackstageForgetPassword from '@/components/backstage/pages/Forgetpassword';
+import CustomBackstageUser from '@/components/backstage/pages/User';
+import CustomBackstageSettings from '@/components/backstage/pages/Settings';
+import CustomBackstageIndexWrap from '@/components/backstage/Indexwrap';
+import CustomBackstageDashboard from '@/components/backstage/pages/Dashboard';
+import CustomBackstageProduct from '@/components/backstage/pages/Product';
+import CustomBackstageOrders from '@/components/backstage/pages/Orders';
+import CustomBackstageCheckout from '@/components/backstage/pages/Checkout';
+import CustomBackstageCoupons from '@/components/backstage/pages/Coupons';
+import CustomBackstageCartWrap from '@/components/backstage/pages/CartWrap';
+
 Vue.use(Router);
 
 export default new Router({
@@ -84,6 +99,81 @@ export default new Router({
           component: Checkout,
         },
       ],
+    },
+    {
+      path: '/backstage',
+      name: 'CustomBackstageIndexWrap',
+      component: CustomBackstageIndexWrap,
+      children: [
+        {
+          path: '/',
+          name: 'CustomBackstageDashboard',
+          component: CustomBackstageDashboard,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'user',
+          name: 'CustomBackstageUser',
+          component: CustomBackstageUser,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'settings',
+          name: 'CustomBackstageSettings',
+          component: CustomBackstageSettings,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'product',
+          name: 'CustomBackstageProduct',
+          component: CustomBackstageProduct,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'orders',
+          name: 'CustomBackstageOrders',
+          component: CustomBackstageOrders,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'coupons',
+          name: 'CustomBackstageCoupons',
+          component: CustomBackstageCoupons,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'cart',
+          name: 'CustomBackstageCart',
+          component: CustomBackstageCartWrap,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'checkout/:order_id',
+          name: 'CustomBackstageCheckout',
+          component: CustomBackstageCheckout,
+          meta: { requiresAuth: true },
+        },
+      ],
+    },
+    {
+      path: '/customerror',
+      name: 'CustomBackstageError',
+      component: CustomBackstageError,
+    },
+    {
+      path: '/customlogin',
+      name: 'CustomBackstageLogin',
+      component: CustomBackstageLogin,
+    },
+    {
+      path: '/customregister',
+      name: 'CustomBackstageRegister',
+      component: CustomBackstageRegister,
+    },
+    {
+      path: '/customforgetpassword',
+      name: 'CustomBackstageForgetPassword',
+      component: CustomBackstageForgetPassword,
     },
     // {
     //   path: '/',

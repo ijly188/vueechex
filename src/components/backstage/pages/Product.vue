@@ -1,67 +1,52 @@
 <template>
-    <div class="products">
+    <div class="product">
+        <Alert></Alert>
         <loading :active.sync="isLoading"></loading>
-        <div class="text-right mt-4">
-            <button class="btn btn-primary"
-                @click.prevent="openModal(true)">建立新的產品</button>
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> 產品列表
+            </div>
+            <div class="card-body">
+                <div class="text-right mt-4">
+                    <button class="btn btn-primary"
+                    @click.prevent="openModal(true)">建立新的產品</button>
+                </div>
+                <table class="table mt-4 table-responsive-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th width="120">分類</th>
+                            <th>產品名稱</th>
+                            <th width="120">原價</th>
+                            <th width="120">售價</th>
+                            <th width="100">是否啟用</th>
+                            <th width="120">編輯</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, key) in products" :key="key">
+                            <td>{{ item.category }}</td>
+                            <td>{{ item.title }}</td>
+                            <td class="text-right">{{ item.origin_price | currency }}</td>
+                            <td class="text-right">{{ item.price | currency }}</td>
+                            <td>
+                                <span v-if="item.is_enabled" class="text-success">啟用</span>
+                                <span v-else>未啟用</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary btn-sm"
+                                @click.prevent="openModal(false, item)">編輯</button>
+                                <button class="btn btn-outline-danger btn-sm"
+                                @click.prevent="opendelModal(item)">刪除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination
+                    :pagination="pagination"
+                    v-on:bindgetProducts="getProducts"
+                ></pagination>
+            </div>
         </div>
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th width="120">分類</th>
-                    <th>產品名稱</th>
-                    <th width="120">原價</th>
-                    <th width="120">售價</th>
-                    <th width="100">是否啟用</th>
-                    <th width="120">編輯</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, key) in products" :key="key">
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.title }}</td>
-                    <td class="text-right">{{ item.origin_price | currency }}</td>
-                    <td class="text-right">{{ item.price | currency }}</td>
-                    <td>
-                        <span v-if="item.is_enabled" class="text-success">啟用</span>
-                        <span v-else>未啟用</span>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-primary btn-sm"
-                        @click.prevent="openModal(false, item)">編輯</button>
-                        <button class="btn btn-outline-danger btn-sm"
-                        @click.prevent="opendelModal(item)">刪除</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <pagination
-            :pagination="pagination"
-            v-on:bindgetProducts="getProducts"
-        ></pagination>
-        <!-- <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item" :class="{'disabled': !pagination.has_pre }">
-                <a class="page-link" href="#" aria-label="Previous"
-                @click.prevent="getProducts(pagination.current_page - 1)">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                </li>
-                <li class="page-item" v-for="page in pagination.total_pages"
-                :class="{'active': pagination.current_page === page}"
-                :key="page">
-                    <a class="page-link" href="#" @click.prevent="getProducts(page)">{{ page }}</a>
-                </li>
-                <li class="page-item" :class="{'disabled': !pagination.has_next }">
-                <a class="page-link" href="#" aria-label="Next"
-                @click.prevent="getProducts(pagination.current_page + 1)">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-                </li>
-            </ul>
-        </nav> -->
         <!-- Modal -->
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,15 +182,15 @@
         </div>
     </div>
 </template>
-
 <script>
-// 可以用這個方式去閃過eslint的跳錯/* global $ */
 import $ from 'jquery';
-import pagination from '../Pagination';
+import Alert from '../../AlertMessage';
+import Pagination from '../components/Pagination';
 
 export default {
   components: {
-    pagination,
+    Alert,
+    Pagination,
   },
   data() {
     return {
@@ -323,3 +308,6 @@ export default {
   },
 };
 </script>
+<style>
+
+</style>

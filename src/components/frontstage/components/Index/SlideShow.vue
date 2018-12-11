@@ -62,7 +62,7 @@ export default {
       i{
         margin: -24px 0 0 0;
         position: relative;
-        top: 50%;
+        top: 42%;
       }
     }
     .owl-prev{
