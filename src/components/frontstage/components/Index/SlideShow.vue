@@ -2,10 +2,18 @@
     <div class="SlideShow">
         <Alert></Alert>
         <carousel :items="1" :autoplay="true" :dots="false">
-            <router-link to="/"><img src="https://www.lexus.com.tw/upload/bnr/201806/2018061511272900000000.jpg"></router-link>
-            <img src="https://d.stat01.com/d354480/slide1.png?design=azure&lc=1537799177">
-            <img src="http://www.z-suo.com/image/cache/catalog/slider/02-1920x570.jpg">
-            <img src="https://www.chiceco.com/img/index/office-02.jpg">
+            <router-link to="/">
+              <img src="https://www.lexus.com.tw/upload/bnr/201806/2018061511272900000000.jpg">
+            </router-link>
+            <router-link to="/">
+              <img src="https://d.stat01.com/d354480/slide1.png?design=azure&lc=1537799177">
+            </router-link>
+            <router-link to="/">
+              <img src="http://www.z-suo.com/image/cache/catalog/slider/02-1920x570.jpg">
+            </router-link>
+            <router-link to="/">
+              <img src="https://www.chiceco.com/img/index/office-02.jpg">
+            </router-link>
         </carousel>
     </div>
 </template>

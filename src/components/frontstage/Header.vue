@@ -6,43 +6,46 @@
             <div class="container-menu-header">
                 <div class="topbar">
                     <div class="topbar-social">
-                        <a href="#" class="topbar-social-item fa fa-facebook"></a>
-                        <a href="#" class="topbar-social-item fa fa-instagram"></a>
-                        <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
-                        <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
-                        <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+                        <a href="https://www.facebook.com/soulmusic790423" target="_blank" class="topbar-social-item fa fa-facebook"></a>
+                        <a href="https://www.instagram.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-instagram"></a>
+                        <a href="https://www.pinterest.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-pinterest-p"></a>
+                        <a href="https://github.com/ijly188" target="_blank" class="topbar-social-item fa fa-github"></a>
+                        <!-- <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a> -->
+                        <a href="https://www.youtube.com/channel/UCgHweuq-hbrfCTFko1-YXFw?view_as=subscriber" target="_blank" class="topbar-social-item fa fa-youtube-play"></a>
                     </div>
 
                     <span class="topbar-child1">
-                        Free shipping for standard order over $100
+                        全館優惠中！要便宜就有多便宜哦！
                     </span>
 
                     <div class="topbar-child2">
                         <span class="topbar-email">
-                            fashe@example.com
+                            <a href="mailto:soulmusic790423@gmail.com">soulmusic790423@gmail.com</a>
                         </span>
 
-                        <div class="topbar-language rs1-select2">
+                        <!-- <div class="topbar-language rs1-select2">
                             <select class="selection-1" name="time">
                                 <option>USD</option>
                                 <option>EUR</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
                 <div class="wrap_header">
                     <!-- Logo -->
-                    <a href="index.html" class="logo">
+                    <router-link to="/" class="logo">
                         <img src="/static/frontstage/images/icons/logo.png" alt="IMG-LOGO">
-                    </a>
+                    </router-link>
 
                     <!-- Menu -->
                     <div class="wrap_menu">
                         <nav class="menu">
                             <ul class="main_menu">
                                 <li>
-                                    <a href="index.html">Home</a>
+                                    <router-link to="/">
+                                        Abby Shop
+                                    </router-link>
                                     <ul class="sub_menu">
                                         <li><a href="index.html">Homepage V1</a></li>
                                         <li><a href="home-02.html">Homepage V2</a></li>
@@ -51,11 +54,15 @@
                                 </li>
 
                                 <li>
-                                    <a href="product.html">Shop</a>
+                                    <router-link to="/category/all">
+                                        商品分類
+                                    </router-link>
                                 </li>
 
                                 <li class="sale-noti">
-                                    <a href="product.html">Sale</a>
+                                    <router-link to="/category/backpack">
+                                        促銷商品
+                                    </router-link>
                                 </li>
 
                                 <li>
@@ -67,11 +74,13 @@
                                 </li>
 
                                 <li>
-                                    <a href="about.html">About</a>
+                                    <router-link to="/about">
+                                        關於Abby shop
+                                    </router-link>
                                 </li>
 
                                 <li>
-                                    <a href="contact.html">Contact</a>
+                                    <a href="mailto:soulmusic790423@gmail.com">聯絡我們</a>
                                 </li>
                             </ul>
                         </nav>

@@ -34,3 +34,6 @@ https://github.com/s950329/vue-owl-carousel
 
 ## slick
 http://kenwheeler.github.io/slick/
+
+## backstage template: CoreUi
+https://coreui.io/

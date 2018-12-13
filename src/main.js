@@ -13,13 +13,16 @@ import '@coreui/coreui';
 import App from './App';
 import router from './router';
 import './bus';
+
 import currencyFilter from './filters/currency';
+import firstwordupperFilter from './filters/firstwordupper';
 
 Vue.use(VueAxios, axios);
 
 // 全域啟動Loading Component
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
+Vue.filter('firstwordupper', firstwordupperFilter);
 
 Vue.use(VeeValidate);
 VeeValidate.Validator.localize('zh-TW', zhTWValidate);

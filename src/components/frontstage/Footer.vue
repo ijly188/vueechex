@@ -10,16 +10,16 @@
 
                     <div>
                         <p class="s-text7 w-size27">
-                            Any questions? Let us know in store at 8th floor, 379 Hudson St,
-                             New York, NY 10018 or call us on (+1) 96 716 6879
+                            如果想要知道更多的話可以用上面任何的聯絡方式聯絡我，訊息或信箱我都會回哦。
                         </p>
 
                         <div class="flex-m p-t-30">
-                            <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-                            <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-                            <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-                            <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-                            <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                            <a href="https://www.facebook.com/soulmusic790423" target="_blank" class="topbar-social-item fa fa-facebook"></a>
+                            <a href="https://www.instagram.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-instagram"></a>
+                            <a href="https://www.pinterest.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-pinterest-p"></a>
+                            <a href="https://github.com/ijly188" target="_blank" class="topbar-social-item fa fa-github"></a>
+                            <!-- <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a> -->
+                            <a href="https://www.youtube.com/channel/UCgHweuq-hbrfCTFko1-YXFw?view_as=subscriber" target="_blank" class="topbar-social-item fa fa-youtube-play"></a>
                         </div>
                     </div>
                 </div>
@@ -31,27 +31,51 @@
 
                     <ul>
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Men
-                            </a>
+                            <router-link to="/category/all" class="s-text7">
+                                全部
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Women
-                            </a>
+                            <router-link to="/category/" class="s-text7">
+                                後揹包
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Dresses
-                            </a>
+                            <router-link to="/category/" class="s-text7">
+                                側背包
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Sunglasses
-                            </a>
+                            <router-link to="/category/" class="s-text7">
+                                公事包
+                            </router-link>
+                        </li>
+
+                        <li class="p-b-9">
+                            <router-link to="/category/" class="s-text7">
+                                休閒包
+                            </router-link>
+                        </li>
+
+                        <li class="p-b-9">
+                            <router-link to="/category/" class="s-text7">
+                                女用推薦
+                            </router-link>
+                        </li>
+
+                        <li class="p-b-9">
+                            <router-link to="/category/" class="s-text7">
+                                女神風
+                            </router-link>
+                        </li>
+
+                        <li class="p-b-9">
+                            <router-link to="/category/" class="s-text7">
+                                文青風
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -63,27 +87,27 @@
 
                     <ul>
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Search
-                            </a>
+                            <router-link to="/category/all" class="s-text7">
+                                搜尋商品
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                About Us
-                            </a>
+                            <router-link to="/about" class="s-text7">
+                                關於Abby Shop
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Contact Us
-                            </a>
+                            <router-link to="/category/" class="s-text7">
+                                聯絡我們
+                            </router-link>
                         </li>
 
                         <li class="p-b-9">
-                            <a href="#" class="s-text7">
-                                Returns
-                            </a>
+                            <router-link to="/category/" class="s-text7">
+                                客服中心
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -144,30 +168,34 @@
             </div>
 
             <div class="t-center p-l-15 p-r-15">
-                <a href="#">
+                <router-link to="/">
                     <img class="h-size2" src="/static/frontstage/images/icons/paypal.png"
                     alt="IMG-PAYPAL">
-                </a>
+                </router-link>
 
-                <a href="#">
+                <router-link to="/">
                     <img class="h-size2" src="/static/frontstage/images/icons/visa.png"
                     alt="IMG-VISA">
-                </a>
+                </router-link>
 
-                <a href="#">
+                <router-link to="/">
                     <img class="h-size2" src="/static/frontstage/images/icons/mastercard.png"
                     alt="IMG-MASTERCARD">
-                </a>
+                </router-link>
 
-                <a href="#">
+                <router-link to="/">
                     <img class="h-size2" src="/static/frontstage/images/icons/express.png"
                     alt="IMG-EXPRESS">
-                </a>
+                </router-link>
 
-                <a href="#">
+                <router-link to="/">
                     <img class="h-size2" src="/static/frontstage/images/icons/discover.png"
                     alt="IMG-DISCOVER">
-                </a>
+                </router-link>
+
+                <div class="t-center s-text8 p-t-20">
+                    以上信用卡通通不能刷
+                </div>
 
                 <div class="t-center s-text8 p-t-20">
                     Copyright © 2018 All rights reserved. | This template is made with
