@@ -6,7 +6,9 @@ import IndexContent from '@/components/frontstage/IndexContent';
 import Category from '@/components/frontstage/Category';
 import Product from '@/components/frontstage/Product';
 import Cart from '@/components/frontstage/Cart';
+import Checkout from '@/components/frontstage/Checkout';
 import About from '@/components/frontstage/About';
+import Member from '@/components/frontstage/Member';
 
 // back stage
 import Login from '@/components/pages/Login';
@@ -14,7 +16,7 @@ import Products from '@/components/pages/Products';
 import Orders from '@/components/pages/Orders';
 import Coupons from '@/components/pages/Coupons';
 import CustomerOrder from '@/components/pages/CustomerOrder';
-import Checkout from '@/components/Checkout';
+import BackstageCheckout from '@/components/Checkout';
 import Dashboard from '@/components/Dashboard';
 
 // custom backstage
@@ -51,12 +53,16 @@ export default new Router({
           component: IndexContent,
         },
         {
+          path: '/category',
+          redirect: '/category/all',
+        },
+        {
           path: 'category/:category',
           name: 'FrontStageCategory',
           component: Category,
         },
         {
-          path: 'product/:id',
+          path: 'product/:itemname',
           name: 'FrontStageProduct',
           component: Product,
         },
@@ -66,9 +72,19 @@ export default new Router({
           component: Cart,
         },
         {
+          path: 'checkout/:checkoutid',
+          name: 'FrontStageCheckout',
+          component: Checkout,
+        },
+        {
           path: 'about',
           name: 'FrontStageAbout',
           component: About,
+        },
+        {
+          path: 'member',
+          name: 'FrontStageMember',
+          component: Member,
         },
       ],
     },
@@ -102,8 +118,8 @@ export default new Router({
         },
         {
           path: 'checkout/:order_id',
-          name: 'Checkout',
-          component: Checkout,
+          name: 'BackstageCheckout',
+          component: BackstageCheckout,
         },
       ],
     },

@@ -10,12 +10,16 @@
                 <div class="row mt-4">
                     <div class="col-md-4 mb-4" v-for="(item, key) in products" :key="key">
                         <div class="card border-0 shadow-sm">
-                            <div style="height: 150px; background-size: cover; background-position: center"
+                            <div style="height: 150px;
+                            background-size: cover;
+                            background-position: center"
                             :style="{backgroundImage: `url(${item.imageUrl})`}"
                             >
                             </div>
                             <div class="card-body">
-                            <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
+                            <span class="badge badge-secondary float-right ml-2">
+                                {{ item.category }}
+                            </span>
                             <h5 class="card-title">
                                 <a href="#" class="text-dark">{{ item.title }}</a>
                             </h5>
@@ -33,12 +37,14 @@
                             <div class="card-footer d-flex">
                             <button type="button" class="btn btn-outline-secondary btn-sm"
                             @click.prevent="getProduct(item.id)">
-                                <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                                <i class="fas fa-spinner fa-spin"
+                                v-if="status.loadingItem === item.id"></i>
                                 查看更多
                             </button>
                             <button type="button" class="btn btn-outline-danger btn-sm ml-auto"
                             @click.prevent="addtoCart(item.id)">
-                                <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                                <i class="fas fa-spinner fa-spin"
+                                v-if="status.loadingItem === item.id"></i>
                                 加到購物車
                             </button>
                             </div>
@@ -59,8 +65,14 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">{{ product.title }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ product.title }}
+                            </h5>
+                            <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -79,7 +91,9 @@
                                 <del class="h6" v-if="product.price">
                                     原價 {{ product.origin_price | currency }} 元
                                 </del>
-                                <div class="h4" v-if="product.price">現在只要 {{ product.price }} 元</div>
+                                <div class="h4" v-if="product.price">
+                                    現在只要 {{ product.price }} 元
+                                </div>
                             </div>
                             <select name="" class="form-control mt-3" v-model="product.num">
                                 <option :value="item" v-for="(item, key) in maxbuynum" :key="key">

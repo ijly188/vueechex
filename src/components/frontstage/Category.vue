@@ -5,6 +5,7 @@
             v-bind:title="this.category"
             v-bind:imgsrc="this.slideimgsrc"
         ></smallonepicslide>
+        <Breadcrumb></Breadcrumb>
         <!-- Content page -->
         <section class="bgwhite p-t-55 p-b-65">
             <div class="container">
@@ -39,13 +40,16 @@
                             </div>
 
                             <span class="s-text8 p-t-5 p-b-5">
-                                Showing {{ pagination.showmin }}–{{ pagination.showmax }} of {{ filterbyrouteProduct.length }} results
+                                Showing {{ pagination.showmin }}–
+                                {{ pagination.showmax }} of 
+                                {{ filterbyrouteProduct.length }} results
                             </span>
                         </div>
 
                         <!-- Product -->
                         <div class="row">
-                            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50" v-for="(item, key) in showProduct" :key="key">
+                            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50"
+                            v-for="(item, key) in showProduct" :key="key">
                                 <!-- {{item}} -->
                                 <!-- Block2 -->
                                 <div class="block2">
@@ -54,7 +58,7 @@
                                         <span class="catetext">
                                             {{item.category}}
                                         </span>
-                                        <img 
+                                        <img
                                         :src="item.imageUrl"
                                         alt="IMG-PRODUCT">
 
@@ -70,7 +74,8 @@
                                             <div class="block2-btn-addcart w-size1 trans-0-4">
                                                 <!-- Button -->
                                                 <button class="flex-c-m size1 bg4 bo-rad-23
-                                                hov1 s-text1 trans-0-4">
+                                                hov1 s-text1 trans-0-4"
+                                                @click="addtoCart(item.id)">
                                                     加入購物車
                                                 </button>
                                             </div>
@@ -84,7 +89,9 @@
                                         </router-link>
 
                                         <span class="block2-price m-text6 p-r-5">
-                                            售價：{{ item.origin_price | currency }}  特價：{{ item.price | currency }}
+                                            售價：
+                                            {{ item.origin_price | currency }}  特價：
+                                            {{ item.price | currency }}
                                         </span>
                                     </div>
                                 </div>
@@ -107,9 +114,11 @@
     </div>
 </template>
 <script>
+// 這頁要資料的邏輯是先去要所有的資料，用getAllproduct去要資料，我們要用pagination去做pagination去做預設值，再用pagination去filter到底要秀什麼資料
 /* global $ */
 // import noUiSlider from '../../../static/frontstage/vendor/noui/nouislider';
 import Alert from '../AlertMessage';
+import Breadcrumb from './components/global/Breadcrumb';
 import smallonepicslide from './components/category/smallonepicslide';
 import Leftbar from './components/category/Leftbar';
 import pagination from './components/global/Pagination';
@@ -117,6 +126,7 @@ import pagination from './components/global/Pagination';
 export default {
   components: {
     Alert,
+    Breadcrumb,
     smallonepicslide,
     Leftbar,
     pagination,
@@ -134,12 +144,16 @@ export default {
       products: '',
       maxshow: 10,
       showProduct: '',
+      status: {
+        loadingItem: '',
+        isUpdate: false,
+      },
     };
   },
   methods: {
     getAllproduct() {
       const vm = this;
-      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/admin/products/all`;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/products/all`;
       vm.isLoading = true;
       vm.$http.get(api).then((response) => {
         vm.isLoading = false;
@@ -190,7 +204,31 @@ export default {
         this.showProduct = newarray;
         // console.log(newarray);
       }
-    }
+    },
+    addtoCart(id, qty = 1) {
+      const vm = this;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/cart`;
+      vm.status.loadingItem = id;
+      const cart = {
+        product_id: id,
+        qty,
+      };
+      vm.$http.post(api, { data: cart }).then((response) => {
+        if (response.data.success) {
+          vm.status.isUpdate = true;
+          vm.status.loadingItem = '';
+          // console.log(response.data.message);
+          // $('#productModal').modal('hide');
+          // vm.product = response.data.product;
+          vm.$bus.$emit('message:push', response.data.message, 'success');
+        }
+      }).catch((error) => {
+        vm.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/');
+        }, 5000);
+      });
+    },
   },
   computed: {
     filterbyrouteProduct() {
@@ -205,6 +243,7 @@ export default {
       const idList = Object.keys(products);
       // console.log(idList);
 
+      // console.log(this.category);
       switch ( this.category ) {
         default:
           key = '-';
@@ -225,19 +264,30 @@ export default {
           break;
           // return 'messengerbag';
         case 'attachecase':
-          return 'attachecase';
+          key = '包包-公事包';
+          break;
+          // return 'attachecase';
         case 'casualstyle':
-          return 'casualstyle';
+          key = '包包-休閒';
+          break;
+          // return 'casualstyle';
         case 'designforwomen':
-          return 'designforwomen';
+          key = '包包-女用推薦';
+          break;
+          // return 'designforwomen';
         case 'beauty':
-          return 'beauty';
+          key = '包包-女神風';
+          break;
+          // return 'beauty';
         case 'hipster':
-          return 'hipster';
+          key = '包包-文青風';
+          break;
+          // return 'hipster';
       }
       for(let i = 0; i < idList.length; i++) {
         // console.log(products[idList[i]]);
         let checkcategory = products[idList[i]].category;
+        // console.log(checkcategory);
         if ( checkcategory.indexOf(key) >= 0 ){
           filterarray.push(products[idList[i]]);
         }

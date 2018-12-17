@@ -46,11 +46,11 @@
                                     <router-link to="/">
                                         Abby Shop
                                     </router-link>
-                                    <ul class="sub_menu">
+                                    <!-- <ul class="sub_menu">
                                         <li><a href="index.html">Homepage V1</a></li>
                                         <li><a href="home-02.html">Homepage V2</a></li>
                                         <li><a href="home-03.html">Homepage V3</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
 
                                 <li>
@@ -65,13 +65,13 @@
                                     </router-link>
                                 </li>
 
-                                <li>
+                                <!-- <li>
                                     <a href="cart.html">Features</a>
                                 </li>
 
                                 <li>
                                     <a href="blog.html">Blog</a>
-                                </li>
+                                </li> -->
 
                                 <li>
                                     <router-link to="/about">
@@ -88,10 +88,10 @@
 
                     <!-- Header Icon -->
                     <div class="header-icons">
-                        <a href="#" class="header-wrapicon1 dis-block">
+                        <router-link to="/member" class="header-wrapicon1 dis-block">
                             <img src="/static/frontstage/images/icons/icon-header-01.png"
                             class="header-icon1" alt="ICON">
-                        </a>
+                        </router-link>
 
                         <span class="linedivide1"></span>
 
@@ -402,7 +402,7 @@ export default {
     var sub_menu_is_showed = -1;
 
     for(var i=0; i<menu.length; i++){
-      $(menu[i]).on('click', function(){         
+      $(menu[i]).on('click', function(){
         if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
           $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
             sub_menu_is_showed = -1;

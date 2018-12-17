@@ -4,7 +4,6 @@
         <smallonepicslide
             v-bind:imgsrc="this.slideimgsrc"
         ></smallonepicslide>
-        
         <!-- content page -->
         <section class="bgwhite p-t-66 p-b-38">
           <div class="container">
@@ -23,7 +22,8 @@
                 <p class="p-b-28">
                   I am a Frontend engineer with 4 years’ professional experience.
                   I am looking for the opportunity to advance to a Management position
-                  where I can use my skills in developing strategies and leading a team from front end views.
+                  where I can use my skills in developing strategies and leading
+                  a team from front end views.
                 </p>
 
                 <div class="bo13 p-l-29 m-l-9 p-b-10">
@@ -64,7 +64,5 @@ export default {
 };
 </script>
 <style>
-.hov-img-zoom img{
-  max-height: 378px;
-}
+
 </style>

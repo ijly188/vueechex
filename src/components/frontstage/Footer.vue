@@ -18,7 +18,6 @@
                             <a href="https://www.instagram.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-instagram"></a>
                             <a href="https://www.pinterest.com/soulmusic790423/" target="_blank" class="topbar-social-item fa fa-pinterest-p"></a>
                             <a href="https://github.com/ijly188" target="_blank" class="topbar-social-item fa fa-github"></a>
-                            <!-- <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a> -->
                             <a href="https://www.youtube.com/channel/UCgHweuq-hbrfCTFko1-YXFw?view_as=subscriber" target="_blank" class="topbar-social-item fa fa-youtube-play"></a>
                         </div>
                     </div>

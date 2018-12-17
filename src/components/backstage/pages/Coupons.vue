@@ -55,7 +55,9 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Coupon</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button"
+                                class="close"
+                                data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -112,7 +114,9 @@
                                 <h5 class="modal-title" id="exampleModalLabel">
                                 <span>刪除Coupon</span>
                                 </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button"
+                                class="close"
+                                data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -136,8 +140,8 @@
     </div>
 </template>
 <script>
-import Alert from '../../AlertMessage';
 import $ from 'jquery';
+import Alert from '../../AlertMessage';
 import pagination from '../components/Pagination';
 
 export default {

@@ -3,7 +3,9 @@
         <Alert></Alert>
         <Slideshow></Slideshow>
         <MediumBanner></MediumBanner>
-        <IndexFutureProduct></IndexFutureProduct>
+        <IndexRelatedProduct
+          :wording="wording"
+        ></IndexRelatedProduct>
         <BannerTwoCol></BannerTwoCol>
         <BlogNews></BlogNews>
         <InsgramNews></InsgramNews>
@@ -16,18 +18,23 @@ import jQuery from 'jquery';
 import Alert from '../AlertMessage';
 import Slideshow from './components/Index/SlideShow';
 import MediumBanner from './components/Index/IndexMediumBanner';
-import IndexFutureProduct from './components/Index/IndexFutureProduct';
+import IndexRelatedProduct from './components/Index/IndexRelatedProduct';
 import BannerTwoCol from './components/Index/BannerTwoCol';
 import BlogNews from './components/Index/BlogNews';
 import InsgramNews from './components/Index/InsgramNews';
 import Ship from './components/Index/Ship';
 
 export default {
+  data(){
+    return {
+      wording: 'FEATURED PRODUCTS',
+    }
+  },
   components: {
     Alert,
     Slideshow,
     MediumBanner,
-    IndexFutureProduct,
+    IndexRelatedProduct,
     BannerTwoCol,
     BlogNews,
     InsgramNews,

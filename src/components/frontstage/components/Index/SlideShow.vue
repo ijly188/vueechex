@@ -9,7 +9,7 @@
               <img src="https://d.stat01.com/d354480/slide1.png?design=azure&lc=1537799177">
             </router-link>
             <router-link to="/">
-              <img src="http://www.z-suo.com/image/cache/catalog/slider/02-1920x570.jpg">
+              <img src="http://www.cr-crossrain.com/english/images/b1.jpg">
             </router-link>
             <router-link to="/">
               <img src="https://www.chiceco.com/img/index/office-02.jpg">

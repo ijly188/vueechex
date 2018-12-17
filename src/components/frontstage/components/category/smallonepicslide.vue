@@ -16,7 +16,7 @@
 export default {
   props: [
     'title',
-    'imgsrc'
+    'imgsrc',
   ],
   data() {
     return {

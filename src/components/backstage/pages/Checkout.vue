@@ -4,7 +4,7 @@
         <loading :active.sync="isLoading"></loading>
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> 優惠券列表
+                <i class="fa fa-align-justify"></i> 訂單資訊
             </div>
             <div class="card-body">
                 <div class="my-5 row justify-content-center">
