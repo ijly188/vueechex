@@ -187,34 +187,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.block2-labelnew::before{
-    content: '';
-    display: none;
-}
-.category{
-    background-color: #66a8a6;
-    z-index: 100;
-    font-family: Montserrat-Regular;
-    font-size: 12px;
-    color: white;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 70px;
-    height: 22px;
-    border-radius: 11px;
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
-.block2-overlay, .block2-img.wrap-pic-w.of-hidden.pos-relative.block2-labelnew{
-    max-height: 153px;
-    overflow: hidden;
-}
+
 </style>

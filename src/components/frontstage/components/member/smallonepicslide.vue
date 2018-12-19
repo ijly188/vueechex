@@ -4,7 +4,7 @@
         <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m"
         :style="{backgroundImage: 'url(' + imgsrc + ')'}">
             <h2 class="l-text2 t-center">
-                {{ title }}
+                {{ this.title }}
             </h2>
         </section>
     </div>
@@ -12,19 +12,24 @@
 <script>
 export default {
   props: [
+    'title',
     'imgsrc',
   ],
   data() {
     return {
-      title: 'Abby Shop',
       message: '',
     };
   },
   methods: {
+    getAllproduct() {
+    },
   },
   created() {
   },
 };
 </script>
 <style lang="scss">
+.bg-title-page{
+  background-size: cover;
+}
 </style>

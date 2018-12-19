@@ -61,4 +61,6 @@ export default {
 @import "../../../static/frontstage/vendor/lightbox2/css/lightbox.min.css";
 @import "../../../static/frontstage/css/util.css";
 @import "../../../static/frontstage/css/main.css";
+
+@import "../../assets/frontstage.scss";
 </style>

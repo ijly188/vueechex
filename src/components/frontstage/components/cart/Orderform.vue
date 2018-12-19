@@ -133,8 +133,5 @@ export default {
 };
 </script>
 <style lang="scss">
-input.form-control.sizefull.s-text7.p-l-15.p-r-15.bo4{
-  border: 1px solid #e6e6e6!important;
-  border-radius: 2px;
-}
+
 </style>

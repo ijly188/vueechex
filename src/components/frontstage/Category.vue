@@ -7,6 +7,7 @@
         ></smallonepicslide>
         <Breadcrumb></Breadcrumb>
         <!-- Content page -->
+        <!-- {{ showProduct }}11 -->
         <section class="bgwhite p-t-55 p-b-65">
             <div class="container">
                 <div class="row">
@@ -192,17 +193,25 @@ export default {
         // console.log(this.filterbyrouteProduct);
         let min = this.pagination.showmin - 1;
         let max = this.pagination.showmax - 1;
+        // console.log(this.filterbyrouteProduct.length);
         let products = this.filterbyrouteProduct;
         let newarray = [];
 
         // console.log(min, max, products, newarray);
-
-        for(let i = min; i <= max; i += 1) {
-          let array = products[i];
-          newarray.push(array);
-        }
+        if( max => this.filterbyrouteProduct.length ) {
+          max = this.filterbyrouteProduct.length;
+          for(let i = min; i < max; i += 1) {
+            let array = products[i];
+            newarray.push(array);
+          }
+        }else {
+          for(let i = min; i <= max; i += 1) {
+            let array = products[i];
+            newarray.push(array);
+          }
+        };
         this.showProduct = newarray;
-        // console.log(newarray);
+        console.log(newarray);
       }
     },
     addtoCart(id, qty = 1) {
@@ -348,31 +357,4 @@ export default {
 
 <style lang="scss">
 @import "../../../static/frontstage/vendor/noui/nouislider.min.css";
-.wrap-pic-w img {
-    width: auto;
-    height: auto;
-    max-height: 344px;
-}
-.catetext {
-    background-color: #66a8a6;
-    z-index: 100;
-    font-family: Montserrat-Regular;
-    font-size: 12px;
-    color: white;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    width: 65px;
-    height: 22px;
-    border-radius: 11px;
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
 </style>

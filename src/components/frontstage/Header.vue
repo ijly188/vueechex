@@ -103,77 +103,44 @@
                             <!-- Header cart noti -->
                             <div class="header-cart header-dropdown">
                                 <ul class="header-cart-wrapitem">
-                                    <li class="header-cart-item">
-                                        <div class="header-cart-item-img">
-                                            <img src="/static/frontstage/images/item-cart-01.jpg"
+                                    <li class="header-cart-item" v-for="(item, key) in cart.carts" :key="key">
+                                        <div class="header-cart-item-img" @click.prevent="removeCartItem(item.id)">
+                                            <img :src="item.product.imageUrl"
                                             alt="IMG">
                                         </div>
 
                                         <div class="header-cart-item-txt">
                                             <a href="#" class="header-cart-item-name">
-                                                White Shirt With Pleat Detail Back
+                                                {{ item.product.title }}
                                             </a>
 
                                             <span class="header-cart-item-info">
-                                                1 x $19.00
-                                            </span>
-                                        </div>
-                                    </li>
-
-                                    <li class="header-cart-item">
-                                        <div class="header-cart-item-img">
-                                            <img src="/static/frontstage/images/item-cart-02.jpg"
-                                            alt="IMG">
-                                        </div>
-
-                                        <div class="header-cart-item-txt">
-                                            <a href="#" class="header-cart-item-name">
-                                                Converse All Star Hi Black Canvas
-                                            </a>
-
-                                            <span class="header-cart-item-info">
-                                                1 x $39.00
-                                            </span>
-                                        </div>
-                                    </li>
-
-                                    <li class="header-cart-item">
-                                        <div class="header-cart-item-img">
-                                            <img src="/static/frontstage/images/item-cart-03.jpg"
-                                            alt="IMG">
-                                        </div>
-
-                                        <div class="header-cart-item-txt">
-                                            <a href="#" class="header-cart-item-name">
-                                                Nixon Porter Leather Watch In Tan
-                                            </a>
-
-                                            <span class="header-cart-item-info">
-                                                1 x $17.00
+                                                {{ item.qty }} x {{ item.final_total | currency }}
                                             </span>
                                         </div>
                                     </li>
                                 </ul>
 
                                 <div class="header-cart-total">
-                                    Total: $75.00
+                                    Total: {{ cart_final_total | currency }}
                                 </div>
 
                                 <div class="header-cart-buttons">
                                     <div class="header-cart-wrapbtn">
                                         <!-- Button -->
-                                        <a href="cart.html"
-                                        class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                            View Cart
-                                        </a>
+                                        <router-link to="/cart"
+                                        class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4"
+                                        v-if="false">
+                                            前往購物車
+                                        </router-link>
                                     </div>
 
                                     <div class="header-cart-wrapbtn">
                                         <!-- Button -->
-                                        <a href="#"
+                                        <router-link to="/cart"
                                         class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                            Check Out
-                                        </a>
+                                            前往購物車
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -372,6 +339,68 @@
 export default {
   components: {
   },
+  data() {
+    return {
+      cart: [],
+      status: {
+        isShow: false,
+      },
+      isLoading: false,
+      cart_total: '',
+      cart_final_total: '',
+    };
+  },
+  methods: {
+    getCart() {
+      const vm = this;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/cart`;
+      vm.isLoading = true;
+      vm.$http.get(api).then((response) => {
+        if (response.data.success) {
+          vm.isLoading = false;
+          // console.log(response.data);
+          vm.cart_total = response.data.data.total;
+          vm.cart_final_total = response.data.data.final_total;
+          vm.cart = response.data.data;
+          if (vm.cart.carts.length === 0) {
+            vm.status.isShow = false;
+          }
+        }
+      }).catch((error) => {
+        // console.log(error);
+        vm.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/');
+        }, 5000);
+      });
+    },
+    removeCartItem(id) {
+      const vm = this;
+      const api = `${process.env.API_DOMAINNAME}/api/${process.env.CUSTOM_PATH}/cart/${id}`;
+      vm.isLoading = true;
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.isLoading = false;
+          // console.log(response.data);
+          // vm.cart = response.data.data;
+          vm.getCart();
+        }
+      }).catch((error) => {
+        vm.$bus.$emit('message:push', error, 'danger');
+        setTimeout(() => {
+          vm.$router.push('/login');
+        }, 5000);
+      });
+    },
+  },
+  created() {
+    this.getCart();
+  },
+  watch: {
+    cart() {
+      console.log(this.cart);
+    },
+  },
   mounted() {
     $('.selection-1').select2({
       minimumResultsForSearch: 20,
@@ -432,5 +461,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../static/frontstage/css/main.css";
+
 </style>

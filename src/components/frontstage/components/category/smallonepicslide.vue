@@ -32,7 +32,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.bg-title-page{
-  background-size: cover;
-}
+
 </style>

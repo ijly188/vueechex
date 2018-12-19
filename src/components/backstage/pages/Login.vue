@@ -101,7 +101,4 @@ export default {
 </script>
 <style lang="scss">
 @import "../../../assets/backstage.scss";
-.backstagelogin{
-    height: 100vh;
-}
 </style>

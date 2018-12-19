@@ -2,13 +2,13 @@
   <div class="index_content">
         <Alert></Alert>
         <Slideshow></Slideshow>
-        <MediumBanner></MediumBanner>
+        <!-- <MediumBanner></MediumBanner> -->
         <IndexRelatedProduct
           :wording="wording"
         ></IndexRelatedProduct>
-        <BannerTwoCol></BannerTwoCol>
-        <BlogNews></BlogNews>
-        <InsgramNews></InsgramNews>
+        <!-- <BannerTwoCol></BannerTwoCol> -->
+        <!-- <BlogNews></BlogNews> -->
+        <!-- <InsgramNews></InsgramNews> -->
         <Ship></Ship>
   </div>
 </template>

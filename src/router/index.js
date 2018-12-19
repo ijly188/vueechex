@@ -9,6 +9,9 @@ import Cart from '@/components/frontstage/Cart';
 import Checkout from '@/components/frontstage/Checkout';
 import About from '@/components/frontstage/About';
 import Member from '@/components/frontstage/Member';
+import MemberDashboard from '@/components/frontstage/components/member/MemberDashboard';
+import MemberOrderList from '@/components/frontstage/components/member/Orderlist';
+
 
 // back stage
 import Login from '@/components/pages/Login';
@@ -85,6 +88,18 @@ export default new Router({
           path: 'member',
           name: 'FrontStageMember',
           component: Member,
+          children: [
+            {
+              path: '/',
+              name: 'MemberDashboard',
+              component: MemberDashboard,
+            },
+            {
+              path: 'orderlist',
+              name: 'MemberOrderList',
+              component: MemberOrderList,
+            },
+          ],
         },
       ],
     },
