@@ -1,5 +1,10 @@
-# vueechex
+# nodejs version
+> v10.10
 
+# vueechex
+> 6.4
+
+# vueechex
 > A Vue.js project
 
 ## Build Setup
