@@ -1,7 +1,7 @@
 # nodejs version
 > v10.10
 
-# vueechex
+# npm
 > 6.4
 
 # vueechex
